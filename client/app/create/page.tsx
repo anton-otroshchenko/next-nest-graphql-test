@@ -1,5 +1,19 @@
 "use client";
 
+import { gql, useMutation } from '@apollo/client';
+
+export const CREATE_POST = gql`
+  mutation CreatePost($title: String!, $content: String!, $author: String!) {
+    createPost(createPostInput: { title: $title, content: $content, author: $author }) {
+      id
+      title
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -10,7 +24,9 @@ export default function CreatePost() {
   const [author, setAuthor] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [createPost, { loading, error: mutationError }] = useMutation(CREATE_POST);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!title || !content || !author) {
@@ -18,19 +34,15 @@ export default function CreatePost() {
       return;
     }
 
-    const newPost = {
-      id: new Date().toISOString(),
-      title,
-      content,
-      author,
-      createdAt: new Date().toLocaleDateString(),
-    };
+    try {
+      await createPost({
+        variables: { title, content, author },
+      });
 
-    const existingPosts = JSON.parse(localStorage.getItem('posts') || '[]');
-    existingPosts.push(newPost);
-    localStorage.setItem('posts', JSON.stringify(existingPosts));
-
-    router.push('/');
+      router.push('/'); // Redirect after successful submission
+    } catch (error) {
+      setError('An error occurred while creating the post');
+    }
   };
 
   return (

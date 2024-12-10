@@ -3,6 +3,20 @@
 import PostCard from "@/components/PostCard/PostCard";
 import { useRouter } from 'next/navigation';
 
+import { gql, useQuery } from '@apollo/client';
+
+const GET_POSTS = gql`
+  query GetPosts {
+    posts {
+      id
+      title
+      content
+      author
+      createdAt
+    }
+  }
+`;
+
 export default function Home() {
 
   const router = useRouter();
@@ -11,32 +25,10 @@ export default function Home() {
     router.push("/create");
   }
 
-  const posts = [
-    {
-      id: 1,
-      title: "First Blog Post",
-      author: "John Doe",
-      createdAt: "10/06/2024",
-    },
-    {
-      id: 2,
-      title: "Second Blog Post",
-      author: "Jane Smith",
-      createdAt: "12/06/2024",
-    },
-    {
-      id: 3,
-      title: "Third Blog Post",
-      author: "Alice Johnson",
-      createdAt: "15/06/2024",
-    },
-    {
-      id: 4,
-      title: "Third Blog Post",
-      author: "Alice Johnson",
-      createdAt: "15/06/2024",
-    },
-  ];
+  const { loading, error, data } = useQuery(GET_POSTS);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
       <div className="font-sans">
@@ -48,7 +40,7 @@ export default function Home() {
         </div>
         <div className="px-16 py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
+            {data.posts.map((post) => (
                 <PostCard key={post.id} post={post}/>
             ))}
           </div>
