@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "npm i && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "typeorm": "npm run build && npx typeorm -d dist/data-source.js",
     "migration:generate": "npm run typeorm -- migration:generate",
