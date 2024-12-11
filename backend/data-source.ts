@@ -1,6 +1,7 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Post } from './src/posts/entities/post.entity';
 import {DbConfig} from "./src/types/config-db.type";
+import { dbConfig } from "./src/config/db-config";
 
 export const dataSourceOptions = (config: DbConfig): DataSourceOptions => ({
   type: "postgres",
@@ -14,3 +15,6 @@ export const dataSourceOptions = (config: DbConfig): DataSourceOptions => ({
   logging: true,
   migrations: ["dist/migrations/*.js"],
 });
+
+
+export const AppDataSource = new DataSource(dataSourceOptions(dbConfig));
