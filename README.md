@@ -38,12 +38,12 @@ _to create the migration firstly build the project with npm run build then write
 
 ### Additional info
 
-Api key is correctly set on deploy therefore you won't get unauthorized error, however it throws an error when the key is incorrect, you can provide any key you want in .env as long as it the same both on client and server
+Api key is correctly set on deploy therefore you won't get unauthorized error, however it throws an error when the key is incorrect and toast notification will show it, you can provide any key you want in .env as long as it the same both on client and server
 
 Tests on the backend are written in post.resolver.spec.ts
 
 On client in __tests__ folder
 
-Redux was also considered to be used here but found no need to do it, but it could have been easily implemented
+Redux was also considered to be used here but found that it will have almost no use, but it could have been easily implemented
 
 
