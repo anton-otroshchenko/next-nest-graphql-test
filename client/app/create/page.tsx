@@ -2,7 +2,7 @@
 
 import { gql, useMutation } from '@apollo/client';
 
-export const CREATE_POST = gql`
+const CREATE_POST = gql`
   mutation CreatePost($title: String!, $content: String!, $author: String!) {
     createPost(createPostInput: { title: $title, content: $content, author: $author }) {
       id
@@ -24,7 +24,7 @@ export default function CreatePost() {
   const [author, setAuthor] = useState('');
   const [error, setError] = useState('');
 
-  const [createPost, { loading, error: mutationError }] = useMutation(CREATE_POST);
+  const [createPost] = useMutation(CREATE_POST);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function CreatePost() {
         variables: { title, content, author },
       });
 
-      router.push('/'); // Redirect after successful submission
+      router.push('/');
     } catch (error) {
       setError('An error occurred while creating the post');
     }
