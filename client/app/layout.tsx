@@ -1,6 +1,5 @@
 "use client"
 
-import localFont from "next/font/local";
 import "./globals.css";
 
 import { ApolloProvider } from '@apollo/client';

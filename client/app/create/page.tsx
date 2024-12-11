@@ -51,7 +51,7 @@ export default function CreatePost() {
       });
 
       router.push('/');
-    } catch(err) {
+    } catch {
       toast.error('Unauthorized');
     }
   };
