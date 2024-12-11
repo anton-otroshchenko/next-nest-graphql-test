@@ -40,7 +40,7 @@ export default function CreatePost() {
       });
 
       router.push('/');
-    } catch (error) {
+    } catch {
       setError('An error occurred while creating the post');
     }
   };
