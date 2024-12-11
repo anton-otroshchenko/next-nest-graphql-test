@@ -8,9 +8,9 @@
   "scripts": {
     "build": "npm i && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "migration:generate": "npm run typeorm -- migration:generate",
-    "migration:run": "npx typeorm -d dist/data-source.js -- migration:run",
-    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:generate": "npx typeorm migration:generate",
+    "migration:run": "npx typeorm migration:run",
+    "migration:revert": "npx typeorm migration:revert",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
