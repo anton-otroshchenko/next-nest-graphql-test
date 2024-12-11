@@ -3,7 +3,7 @@
 import { useQuery } from '@apollo/client';
 import { use } from "react";
 import { GET_POST } from "@/queries/get-post/get-post";
-import { transformTimestamp } from "@/helpers/transform-timestamp";
+import { transformTimestamp } from "@/helpers/transform-timestamp/transform-timestamp";
 
 type Properties = {
   params: Promise<{
@@ -25,8 +25,8 @@ export default function Post({ params }: Properties) {
 
   return (
       <div>
-        <div className="flex flex-col justify-between gap-4 px-16 py-4 border-b border-gray-500">
-          <h1 className="text-2xl">{title}</h1>
+        <div className="flex flex-col justify-between gap-4 px-8 py-4 border-b border-gray-500">
+          <h1 className="text-2xl truncate">{title}</h1>
           <p>
             <strong>Author:</strong> {author}
           </p>
@@ -34,7 +34,7 @@ export default function Post({ params }: Properties) {
             <strong>Date:</strong> {transformTimestamp(createdAt)}
           </p>
         </div>
-        <div className="px-16 py-4 leading-relaxed space-y-4">
+        <div className="px-8 py-4 leading-relaxed space-y-4 overflow-hidden break-words">
           {content}
         </div>
       </div>

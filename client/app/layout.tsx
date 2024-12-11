@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-gray-700 text-gray-300 font-roboto antialiased`}
+        className='bg-gray-700 text-gray-300 font-roboto antialiased'
       >
       <ApolloProvider client={client}>
         <Toaster position="top-right" />

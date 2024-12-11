@@ -1,16 +1,17 @@
 import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import * as process from "node:process";
+import { API_SECRET_KEY } from "../../config/config";
+import { whiteRoutes } from "../../constants/white-routes/white-routes";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    const isGraphQLRequest = req.body?.operationName === 'CreatePost';
+    const operationName = req.body?.operationName;
 
-    if (isGraphQLRequest) {
+    if (operationName && !whiteRoutes.includes(operationName)) {
       const apiKey = req.headers['x-api-key'];
 
-      if (apiKey !== process.env.API_SECRET_KEY) {
+      if (apiKey !== API_SECRET_KEY) {
         throw new UnauthorizedException({
           errors: [{ message: 'Unauthorized' }],
         });

@@ -4,7 +4,7 @@ import PostCard from "@/components/PostCard/PostCard";
 import { useRouter } from 'next/navigation';
 
 import { useQuery } from '@apollo/client';
-import { Post } from "@/types/post.type";
+import { Post } from "@/types/post-type/post.type";
 import { GET_POSTS } from "@/queries/get-posts/get-posts";
 
 export default function Home() {
@@ -30,9 +30,12 @@ export default function Home() {
         </div>
         <div className="px-16 py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.posts.map((post: Post) => (
-                <PostCard key={post.id} post={post}/>
-            ))}
+            {data.posts.length === 0
+            ? <p>No posts to show</p>
+                : data.posts.map((post: Post) => (
+                    <PostCard key={post.id} post={post}/>
+                ))
+            }
           </div>
         </div>
       </div>

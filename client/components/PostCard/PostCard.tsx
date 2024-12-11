@@ -1,8 +1,8 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
-import { Post } from "@/types/post.type";
-import { transformTimestamp } from "@/helpers/transform-timestamp";
+import { Post } from "@/types/post-type/post.type";
+import { transformTimestamp } from "@/helpers/transform-timestamp/transform-timestamp";
 
 type Properties = {
   post: Post;

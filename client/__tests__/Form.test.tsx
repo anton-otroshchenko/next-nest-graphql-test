@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import CreatePost from '../app/create/page'; // Adjust the path as needed
-import { CREATE_POST } from '@/mutations/create-post/create-post';
+import CreatePost from '../app/create/page';
 import '@testing-library/jest-dom'
 
 jest.mock('next/navigation', () => ({

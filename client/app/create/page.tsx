@@ -27,7 +27,9 @@ export default function CreatePost() {
 
     if (!title) {
       newErrors.title = 'Title is required';
-    } else if (title.length > 100) {
+    }
+
+    if (title.length > 100) {
       newErrors.title = 'Title cannot be more than 100 characters';
     }
 
