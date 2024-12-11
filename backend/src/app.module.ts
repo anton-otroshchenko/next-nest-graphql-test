@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,7 +7,7 @@ import { dataSourceOptions } from "../data-source";
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from "@nestjs/apollo";
 import { ConfigModule } from '@nestjs/config';
-import * as process from "node:process";
+import { AuthMiddleware } from "./middleware/auth";
 
 @Module({
   imports: [
@@ -19,18 +19,20 @@ import * as process from "node:process";
       debug: true,
       driver: ApolloDriver
     }),
-    TypeOrmModule.forRoot(dataSourceOptions(
-        {
-          DATABASE_NAME: process.env.DATABASE_NAME,
-          DATABASE_HOST: process.env.DATABASE_HOST,
-          DATABASE_PORT: process.env.DATABASE_PORT,
-          DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
-          DATABASE_USER: process.env.DATABASE_USER,
-        }
-    )),
+    TypeOrmModule.forRoot(dataSourceOptions({
+      DATABASE_NAME: process.env.DATABASE_NAME,
+      DATABASE_HOST: process.env.DATABASE_HOST,
+      DATABASE_PORT: process.env.DATABASE_PORT,
+      DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
+      DATABASE_USER: process.env.DATABASE_USER,
+    })),
     PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('*');
+  }
+}

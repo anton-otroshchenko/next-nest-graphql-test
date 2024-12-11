@@ -3,20 +3,9 @@
 import PostCard from "@/components/PostCard/PostCard";
 import { useRouter } from 'next/navigation';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Post } from "@/types/post.type";
-
-const GET_POSTS = gql`
-  query GetPosts {
-    posts {
-      id
-      title
-      content
-      author
-      createdAt
-    }
-  }
-`;
+import { GET_POSTS } from "@/queries/get-posts/get-posts";
 
 export default function Home() {
 
@@ -32,9 +21,9 @@ export default function Home() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-      <div className="font-sans">
-        <div className="flex justify-between px-16 py-4 border-b border-gray-500">
-          <h1 className="text-2xl">Posts</h1>
+      <div>
+        <div className="flex items-center justify-between px-16 py-4 border-b border-gray-500">
+          <h1 className="text-center text-2xl">Posts</h1>
           <button onClick={handleCreateNewPost} className="border border-gray-500 px-4 py-2 rounded-2xl hover:bg-gray-500">
             Create
           </button>

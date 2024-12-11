@@ -5,17 +5,8 @@ import "./globals.css";
 
 import { ApolloProvider } from '@apollo/client';
 import client from '../apollo-client'
+import { Toaster } from "react-hot-toast";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export default function RootLayout({
   children,
@@ -25,9 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-gray-700 text-gray-300 ${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`bg-gray-700 text-gray-300 font-roboto antialiased`}
       >
       <ApolloProvider client={client}>
+        <Toaster position="top-right" />
         {children}
       </ApolloProvider>
       </body>

@@ -16,5 +16,4 @@ export const dataSourceOptions = (config: DbConfig): DataSourceOptions => ({
   migrations: ["dist/migrations/*.js"],
 });
 
-
 export const AppDataSource = new DataSource(dataSourceOptions(dbConfig));
