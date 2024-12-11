@@ -1,8 +1,13 @@
 "use client"
 
 import { useRouter } from 'next/navigation';
+import { Post } from "@/types/post.type";
 
-export default function PostCard({ post }) {
+type Properties = {
+  post: Post;
+}
+
+export default function PostCard({ post }: Properties) {
   const router = useRouter();
 
   const handleReadMore = () => {

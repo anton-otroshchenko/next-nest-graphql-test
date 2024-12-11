@@ -4,6 +4,7 @@ import PostCard from "@/components/PostCard/PostCard";
 import { useRouter } from 'next/navigation';
 
 import { gql, useQuery } from '@apollo/client';
+import { Post } from "@/types/post.type";
 
 const GET_POSTS = gql`
   query GetPosts {
@@ -40,7 +41,7 @@ export default function Home() {
         </div>
         <div className="px-16 py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.posts.map((post) => (
+            {data.posts.map((post: Post) => (
                 <PostCard key={post.id} post={post}/>
             ))}
           </div>
