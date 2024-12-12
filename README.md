@@ -46,4 +46,6 @@ On client in __tests__ folder
 
 Redux was also considered to be used here but found that it will have almost no use, but it could have been easily implemented
 
+Due to the fact the render deploy is free some requests may take some time to respond
+
 
