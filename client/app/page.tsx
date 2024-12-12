@@ -6,13 +6,14 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@apollo/client';
 import { Post } from "@/types/post-type/post.type";
 import { GET_POSTS } from "@/queries/get-posts/get-posts";
+import { AppRoute } from "@/enums/app-route/app-route.enum";
 
 export default function Home() {
 
   const router = useRouter();
 
   const handleCreateNewPost = () => {
-    router.push("/create");
+    router.push(AppRoute.CREATE);
   }
 
   const { loading, error, data } = useQuery(GET_POSTS);

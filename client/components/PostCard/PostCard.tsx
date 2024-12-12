@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Post } from "@/types/post-type/post.type";
 import { transformTimestamp } from "@/helpers/transform-timestamp/transform-timestamp";
+import { AppRoute } from "@/enums/app-route/app-route.enum";
 
 type Properties = {
   post: Post;
@@ -12,7 +13,7 @@ export default function PostCard({ post }: Properties) {
   const router = useRouter();
 
   const handleReadMore = () => {
-    router.push(`/posts/${post.id}`);
+    router.push(`${AppRoute.POST}/${post.id}`);
   };
 
   return (

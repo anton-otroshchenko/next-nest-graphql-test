@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { GET_POSTS } from "@/queries/get-posts/get-posts";
 import { CREATE_POST } from "@/mutations/create-post/create-post";
 import { toast } from 'react-hot-toast';
+import { AppRoute } from "@/enums/app-route/app-route.enum";
+import {ErrorMessage} from "@/enums/error-messages/error-messages.enum";
 
 export default function CreatePost() {
   const router = useRouter();
@@ -26,19 +28,19 @@ export default function CreatePost() {
     const newErrors: { title?: string; content?: string; author?: string } = {};
 
     if (!title) {
-      newErrors.title = 'Title is required';
+      newErrors.title = ErrorMessage.TITLE_REQUIRED;
     }
 
     if (title.length > 100) {
-      newErrors.title = 'Title cannot be more than 100 characters';
+      newErrors.title = ErrorMessage.TITLE_LENGTH;
     }
 
     if (!content) {
-      newErrors.content = 'Content is required';
+      newErrors.content = ErrorMessage.CONTENT_REQUIRED;
     }
 
     if (!author) {
-      newErrors.author = 'Author is required';
+      newErrors.author = ErrorMessage.AUTHOR_REQUIRED;
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -52,9 +54,9 @@ export default function CreatePost() {
         refetchQueries: [{ query: GET_POSTS }],
       });
 
-      router.push('/');
+      router.push(AppRoute.HOMEPAGE);
     } catch {
-      toast.error('Unauthorized');
+      toast.error(ErrorMessage.UNAUTHORIZED);
     }
   };
 
